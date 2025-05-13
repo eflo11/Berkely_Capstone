@@ -47,6 +47,16 @@ def encode(df):
     return X, y
 ```
 
+You will also find that we have went ahead and added weights to a certain class and that is the 'REG' class. The reason for this is that some of the REG pool means that it won't actually get stored in a CA room and some of the say whether a fruit goes to REG or not is based on industry pricing and whether the grower wishes to pack right away.
+```python
+# Assign and define class weights
+class_weights = {3: 0.5,  # REG gets a lower weight because we have market price influence when it comes to selecting packing right away
+                 0: 1.0,
+                 2: 1.0,
+                 1: 1.0}
+```
+
+
 ## Modeling
 For the first phase of modeling I went through and created a DummyClassifier so that I could get a good baseline for what the data is saying as a good default threshold.
 
@@ -90,7 +100,14 @@ The best results were through a DT at 64% accuracy.
 
 ![Results](./images/results.png)
 
-## Next steps
-Clearly through this work the accuracies are still not there for me to be able to put this into a full application. The next phase it to pull in more of the production QC tests that happen after the apples are pulled out of the rooms to be able to get more QC data points that would give use a better determination what/if there are any coorelations.
+## Re-analysis #2
 
-After we get an acceptable success rate on pool classification, > 90%, then we want to start to layer in if we see any coorelation between the room itself and any degregation patterns in the QC scores of before and after.
+The final models that we ran through were the Random Forest Calssifier, XGBClassifier, and LGBMClassifiers to see how those would produce against the data due to its strong structured state.
+
+This is where the models truly started to shine as within the Random Forest Classifier we were able to get to a 95% accuracy rate while having a decent precision and recall where the weakest class seems to be in the MID selections.
+
+## Summary
+What we have done here is that we have been able to take into account all of our historical data from our QC process of taking an apples pressure or starch readings, push it into a RandomForestClassifier, and be able to then feed it the qc data of an apple coming directly from the orchard and get a 95% accuracy on whether that fruit should be put towards REG, EARLY, MID, or LATE rooms.
+
+Once you have that room assignment you can then utilize the same type of idea from all of the historical packouts from that grower, lot, qc results, stored room, and predict what the packout % will be. When it comes to the fruit industry this is a game changer in terms of knowing how your fruit will do this upcoming year so that you can make plans with sales desks to sell that fruit and make other deals with processing plants for the apples to make juice.
+
