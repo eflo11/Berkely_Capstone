@@ -86,7 +86,7 @@ X_trimmed = pd.concat([X_trimmed, X[variety_columns]], axis=1)
 This forced me to only take into account all the QC data and then the variety columns.
 
 You can then see the initial graph here from the run:
-![Model Initial Performance](./images/initial_model_performance_comparison.png)
+![Model Initial Performance](./images/performance_results.png)
 
 ## Re-analysis
 The next phase is to see how we can improve our accuracy against the initial testing through default models. The next approach is to try to utilize the functionality of GridSearch to loop through different parameters and determine which variation of a model will produce the greatest accuracy towards our desired result.
@@ -95,7 +95,7 @@ Through these adjustments I was able to produce roughly a 4% increase in accurac
 
 The best results were through a DT at 64% accuracy.
 
-![Results](./images/results.png)
+![Results](./images/ensemble_model_comparison.png)
 
 ## Re-analysis #2
 
