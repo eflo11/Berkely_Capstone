@@ -1,4 +1,4 @@
-# Berkely_Capstone
+# Berkeley_Capstone
 ## Pool Accuracy
 With in this Jupyter Notebook, [main.ipynb](./main_final.ipynb), you will find steps that I have used to try to determine attributes that allow me to predict what pool a set of bins should be set to.
 
