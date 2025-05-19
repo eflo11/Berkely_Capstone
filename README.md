@@ -85,25 +85,21 @@ X_trimmed = pd.concat([X_trimmed, X[variety_columns]], axis=1)
 
 This forced me to only take into account all the QC data and then the variety columns.
 
+The next phase is to see how we can improve our accuracy against the initial testing through default models. This approach utilizes the functionality of GridSearch to loop through different parameters and determine which variation of a model will produce the greatest accuracy towards our desired result.
+
+This produced an 88% success rate through KNN while utilizing a neighbor parameter of 2.
+
 You can then see the initial graph here from the run:
 ![Model Initial Performance](./images/performance_results.png)
 
 ## Re-analysis
-The next phase is to see how we can improve our accuracy against the initial testing through default models. The next approach is to try to utilize the functionality of GridSearch to loop through different parameters and determine which variation of a model will produce the greatest accuracy towards our desired result.
-
-Through these adjustments I was able to produce roughly a 4% increase in accuracy but still well below my expectations of where it needs to be for a real world business application.
-
-The best results were through a DT at 64% accuracy.
-
-![Results](./images/ensemble_model_comparison.png)
-
-## Re-analysis #2
-
-The final models that we ran through were the Random Forest Calssifier, XGBClassifier, and LGBMClassifiers to see how those would produce against the data due to its strong structured state.
+Although 88% is quite good, it still isn't quite good enough for production level trust. The final models that we ran through were the Random Forest Calssifier, XGBClassifier, and LGBMClassifiers to see how those would produce against the data due to its strong structured state.
 
 This is where the models truly started to shine as within the Random Forest Classifier we were able to get to a 95% accuracy rate while having a decent precision and recall where the weakest class seems to be in the MID selections.
 
 I then applied SHAP diagrams to show per each class what the key attributes were in determining the results. A lot of them share the same attributes but it is interesting to see how they may shift in priority.
+
+![Results](./images/ensemble_model_comparison.png)
 
 ![Class 1](./images/shap_class1.png)
 ![Class 2](./images/shap_class2.png)
